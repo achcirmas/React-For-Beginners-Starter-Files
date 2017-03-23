@@ -5,7 +5,9 @@ import { render } from 'react-dom';
 // import the CSS file
 import './css/style.css';
 
+// import the app component
+import App from './components/App';
 // import the component
 import StorePicker from './components/StorePicker';
 // and put it in the dom somewhere
-render(<StorePicker/>, document.querySelector('#main'));
+render(<App/>, document.querySelector('#main'));
