@@ -16,8 +16,9 @@ class StorePicker extends React.Component {
     event.preventDefault();
     console.log("you changed the url");
     // first grab the text from the box
-    console.log(this.storeInput.value);
+    const storeId = this.storeInput.value;
     // second we're going to transition from / to /store/storeId
+    this.context.router.transitionTo(`/store/${storeId}`)
   }
   // needs at least one method (render)
   render() {
@@ -26,13 +27,18 @@ class StorePicker extends React.Component {
     // don't put comments at the top level in a return statement
     return(
       <form className="store-selector" onSubmit={(e) => this.goToStore(e)}>
-        { /* this is how to write a comment */ }
+        { /* this is how to write a comment inside a return statement */ }
         <h2>Please enter a store.</h2>
         <input type="text" required placeholder="Store Name" defaultValue={getFunName()} ref={(input) => { this.storeInput = input}} />
         <button type="submit">Visit Store →</button>
       </form>
     )
   }
+}
+
+// surface the router
+StorePicker.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default StorePicker;
