@@ -14,6 +14,7 @@ class App extends React.Component {
     super();
     this.loadSamples = this.loadSamples.bind(this);
     this.addFish = this.addFish.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
     // instead of react create and getInitialState,
     // use ES6 class/constructor
     this.state = {
@@ -44,6 +45,18 @@ class App extends React.Component {
     });
   }
 
+  addToOrder(key) {
+    // key is fish1, fish2, etc
+
+    // take a copy of our state
+    // ... is an object spread, makes a copy
+    const order = {...this.state.order};
+    // update or add the new number of fish ordered
+    // if the key doesn't exist, then order[key] will be one
+    order[key] = order[key] + 1 || 1;
+    this.setState({ order });
+  }
+
 
   // needs at least one method (render)
   render() {
@@ -59,13 +72,14 @@ class App extends React.Component {
             .map loops over the array
 
             key={key} is like an ID
-            
+
             details gives the fish properties: desc, image, name
            */}
           {
+            /* you can't access key inside the component. you have to save it to another variable */
             Object
             .keys(this.state.fishes)
-            .map(key => <Fish key={key} details={this.state.fishes[key]} />)
+            .map(key => <Fish key={key} details={this.state.fishes[key]} addToOrder={this.addToOrder} index={key} />)
           }
           </ul>
         </div>
