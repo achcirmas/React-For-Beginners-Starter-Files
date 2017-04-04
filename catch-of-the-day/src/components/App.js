@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
 
 // make our first component
 class App extends React.Component {
@@ -10,6 +11,7 @@ class App extends React.Component {
     // initialize the react component called App
     // so we can use this
     super();
+    this.loadSamples = this.loadSamples.bind(this);
     this.addFish = this.addFish.bind(this);
     // instead of react create and getInitialState,
     // use ES6 class/constructor
@@ -35,6 +37,12 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes
+    });
+  }
+
 
   // needs at least one method (render)
   render() {
@@ -45,7 +53,7 @@ class App extends React.Component {
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory addFish={this.addFish}/>
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     )
   }
