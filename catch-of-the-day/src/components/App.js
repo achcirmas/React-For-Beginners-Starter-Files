@@ -16,6 +16,7 @@ class App extends React.Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addFish = this.addFish.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
     this.removeFish = this.removeFish.bind(this);
     // instead of react create and getInitialState,
@@ -105,6 +106,12 @@ class App extends React.Component {
     this.setState({ order });
   }
 
+  removeFromOrder(key) {
+    const order = {...this.state.order};
+    delete order[key];
+    this.setState({ order });
+  }
+
   // needs at least one method (render)
   render() {
     // <Header /> is not the same as <header>
@@ -135,6 +142,7 @@ class App extends React.Component {
           fishes={this.state.fishes} 
           order={this.state.order} 
           params={this.props.params}
+          removeFromOrder={this.removeFromOrder}
         />
         <Inventory 
           addFish={this.addFish} 
